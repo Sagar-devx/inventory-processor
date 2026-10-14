@@ -12,6 +12,10 @@ public record PagedResponse<T>(
     int totalPages,
     boolean last
 ) {
+    public static <T> PagedResponse<T> from(Page<T> page) {
+        return fromPage(page);
+    }
+
     public static <T> PagedResponse<T> fromPage(Page<T> page) {
         return new PagedResponse<>(
             page.getContent(),

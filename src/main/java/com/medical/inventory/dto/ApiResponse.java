@@ -8,6 +8,14 @@ public record ApiResponse<T>(
     T data,
     Instant timestamp
 ) {
+    public static <T> ApiResponse<T> success(T data) {
+        return new ApiResponse<>(true, "Operation successful", data, Instant.now());
+    }
+
+    public static <T> ApiResponse<T> success(T data, String message) {
+        return new ApiResponse<>(true, message, data, Instant.now());
+    }
+
     public static <T> ApiResponse<T> ok(String message, T data) {
         return new ApiResponse<>(true, message, data, Instant.now());
     }
