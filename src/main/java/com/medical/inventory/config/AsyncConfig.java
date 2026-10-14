@@ -14,14 +14,14 @@ import java.util.concurrent.Executors;
 @EnableAsync
 public class AsyncConfig implements AsyncConfigurer {
 
-    @Bean(name = "virtualThreadExecutor")
+    @Bean(name = {"taskExecutor", "virtualThreadExecutor"})
     @Primary
-    public Executor virtualThreadExecutor() {
+    public Executor taskExecutor() {
         return new TaskExecutorAdapter(Executors.newVirtualThreadPerTaskExecutor());
     }
 
     @Override
     public Executor getAsyncExecutor() {
-        return virtualThreadExecutor();
+        return taskExecutor();
     }
 }
